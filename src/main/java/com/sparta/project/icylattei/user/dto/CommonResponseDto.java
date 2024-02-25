@@ -11,9 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommonResponseDto {
+public class CommonResponseDto<T> {
 
     private String message;
     private Integer statusCode;
+    private T data;
 
 }
