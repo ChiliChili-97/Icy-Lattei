@@ -1,20 +1,19 @@
 package com.sparta.project.icylattei.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.project.icylattei.user.dto.requestDto.SignInRequest;
+import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import com.sparta.project.icylattei.userDetails.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.io.IOException;
 
 @Slf4j(topic = "로그인 및 JWT 생성")
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -28,7 +27,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            SignInRequest requestDto = new ObjectMapper().readValue(request.getInputStream(), SignInRequest.class);
+            SignupRequest requestDto = new ObjectMapper().readValue(request.getInputStream(), SignupRequest.class);
 
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(

@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Getter
 public record UserDetailsImpl(User user) implements UserDetails {
 
     @Override

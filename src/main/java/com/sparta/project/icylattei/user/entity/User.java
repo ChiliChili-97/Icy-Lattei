@@ -23,7 +23,28 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
+    private String profile;
+
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
+
+    public User(String username, String password, String nickname, String profile) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.profile = profile;
+    }
+
+    // 서비스 메서드
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
+
+
