@@ -2,6 +2,7 @@ package com.sparta.project.icylattei.user.service;
 
 import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
 import com.sparta.project.icylattei.user.entity.User;
+import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import com.sparta.project.icylattei.user.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +24,9 @@ public class UserService {
         String username = request.getUsername();
         String password = passwordEncoder.encode(request.getPassword());
         String nickname = request.getNickname();
-        String profile = request.getProfile();
 
         validateUserDuplicate(userRepository.findByUsername(username));
-        User user = new User(username, password, nickname, profile);
+        User user = new User(username, password, nickname, UserRoleEnum.USER);
 
         userRepository.save(user);
     }

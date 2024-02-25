@@ -13,7 +13,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommonResponseDto {
 
-    private String msg;
+    private String message;
     private Integer statusCode;
 
 }

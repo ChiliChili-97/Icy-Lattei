@@ -29,11 +29,11 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(String username, String password, String nickname, String profile) {
+    public User(String username, String password, String nickname, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.profile = profile;
+        this.role = role;
     }
 
     // 서비스 메서드
