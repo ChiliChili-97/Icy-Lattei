@@ -29,7 +29,7 @@ public class ReviewService {
         return new ReviewResponse(user.getNickname(), review);
     }
 
-    public List<ReviewResponse> LoadReviewList(Long productId, User user) {
+    public List<ReviewResponse> LoadReviewList(Long productId) {
 
         Product product = validProduct(productId);
 

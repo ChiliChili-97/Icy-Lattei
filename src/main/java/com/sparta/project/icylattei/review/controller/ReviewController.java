@@ -35,10 +35,9 @@ public class ReviewController {
 
     // 상품별 리뷰 조회
     @GetMapping("/reviews")
-    public List<ReviewResponse> LoadReviewList(@PathVariable Long productId,
-        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public List<ReviewResponse> LoadReviewList(@PathVariable Long productId) {
 
-        return reviewService.LoadReviewList(productId, userDetails.getUser());
+        return reviewService.LoadReviewList(productId);
     }
 
     // 리뷰 삭제
