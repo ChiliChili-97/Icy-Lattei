@@ -1,15 +1,9 @@
 package com.sparta.project.icylattei.user.service;
 
-import com.sparta.project.icylattei.jwt.JwtUtil;
-import com.sparta.project.icylattei.user.dto.LoginSucessDto;
 import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
-import com.sparta.project.icylattei.user.dto.requestDto.UserRequest;
-import com.sparta.project.icylattei.user.entity.Token;
 import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
-import com.sparta.project.icylattei.user.repository.TokenRepository;
 import com.sparta.project.icylattei.user.repository.UserRepository;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;

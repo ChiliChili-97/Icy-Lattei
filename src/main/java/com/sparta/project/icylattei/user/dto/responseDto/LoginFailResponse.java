@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginFailResponseDto {
+public class LoginFailResponse {
 
     private String message;
     private Integer statusCode;
