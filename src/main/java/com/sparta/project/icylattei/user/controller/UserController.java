@@ -33,7 +33,6 @@ public class UserController {
             .body(new CommonResponseDto("회원가입 성공", HttpStatus.CREATED.value(), null));
     }
 
-
     @GetMapping("/logout")
     public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response,
