@@ -2,6 +2,7 @@ package com.sparta.project.icylattei.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,10 +30,10 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(String username, String password, String nickname, UserRoleEnum role) {
+    @Builder
+    public User(String username, String password, UserRoleEnum role) {
         this.username = username;
         this.password = password;
-        this.nickname = nickname;
         this.role = role;
     }
 
