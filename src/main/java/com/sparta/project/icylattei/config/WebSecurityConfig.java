@@ -62,7 +62,7 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(authorizeHttpRequests ->
             authorizeHttpRequests
                 .requestMatchers("/").permitAll()
-                .requestMatchers("/signIn", "/signUp").permitAll()
+                .requestMatchers("/users/signup", "/users/login").permitAll()
                 .anyRequest().authenticated());
 
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
