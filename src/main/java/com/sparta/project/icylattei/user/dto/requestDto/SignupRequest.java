@@ -11,7 +11,7 @@ import lombok.Setter;
 public class SignupRequest {
 
     @NotBlank(message =  "아이디는 필수로 입력해야 합니다.")
-    @Pattern(regexp = "^[a-z0-9]{4,10}$", message = "아이디는 영어 소문자와, 숫자(0~9)로 구성되어야 하며, 4자 이상 10자 이하여야 합니다")
+    @Pattern(regexp = "^[a-z0-9]{4,10}$", message = "아이디는 영어 소문자와, 숫자(0~9)로 구성되어야 하며, 4자 이상 10자 이하여야 합니다.")
     private String username;
 
     @NotBlank(message = "비밀번호는 필수로 입력해야 합니다.")
