@@ -10,14 +10,14 @@ import lombok.Setter;
 public class ReviewResponse {
 
     private Long reviewId;
-    private String review;
+    private String content;
     private String nickname;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
     public ReviewResponse(String nickname, Review review) {
         this.reviewId = review.getReviewId();
-        this.review = review.getContent();
+        this.content = review.getContent();
         this.nickname = nickname;
         this.createdAt = review.getCreatedAt();
         this.modifiedAt = review.getModifiedAt();
