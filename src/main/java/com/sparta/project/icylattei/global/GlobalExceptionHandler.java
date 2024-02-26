@@ -9,17 +9,33 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private ResponseEntity<ExceptionDto> createResponse(HttpStatus status, String message) {
+        return ResponseEntity.status(status.value())
+            .body(ExceptionDto.builder()
+                .statusCode(status.value())
+                .state(status)
+                .message(message)
+                .build());
+    }
+
+
     @ExceptionHandler({IllegalArgumentException.class})
-    public ResponseEntity<String> handleException(Exception e ){
-        return ResponseEntity
-            .status(HttpStatus.BAD_REQUEST.value())
-            .body(e.getMessage());
+    public ResponseEntity<ExceptionDto> handleException(HttpStatus status, String message ){
+        return ResponseEntity.status(status.value())
+            .body(ExceptionDto.builder()
+                .statusCode(status.value())
+                .state(status)
+                .message(message)
+                .build());
     }
 
     @ExceptionHandler({DuplicateKeyException.class})
-    public ResponseEntity<String> handleDuplicateException(Exception e ){
-        return ResponseEntity
-            .status(HttpStatus.CONFLICT.value())
-            .body(e.getMessage());
+    public ResponseEntity<ExceptionDto> handleDuplicateException(HttpStatus status, String message){
+        return ResponseEntity.status(status.value())
+            .body(ExceptionDto.builder()
+                .statusCode(status.value())
+                .state(status)
+                .message(message)
+                .build());
     }
 }
