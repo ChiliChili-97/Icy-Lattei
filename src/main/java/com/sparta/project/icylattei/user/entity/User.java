@@ -1,10 +1,13 @@
 package com.sparta.project.icylattei.user.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Getter
@@ -24,11 +27,19 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    private String profile;
+    private String info;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
+
+    @CreatedDate
+    @Column(name = "CREATED_AT")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name = "MODIFIED_AT")
+    private LocalDateTime modifiedAt;
 
     @Builder
     public User(String username, String password, UserRoleEnum role) {
