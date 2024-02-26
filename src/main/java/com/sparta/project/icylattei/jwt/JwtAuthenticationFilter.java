@@ -1,9 +1,8 @@
 package com.sparta.project.icylattei.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.project.icylattei.global.CommonResponseDto;
 import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
-import com.sparta.project.icylattei.user.dto.responseDto.LoginFailResponse;
-import com.sparta.project.icylattei.user.dto.responseDto.LoginResponse;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import com.sparta.project.icylattei.userDetails.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
@@ -56,7 +55,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
         // 응답 생성
-        LoginResponse loginResponse = new LoginResponse("로그인 성공", HttpStatus.OK.value());
+        CommonResponseDto loginResponse = new CommonResponseDto(HttpStatus.OK.value(), null);
        // JSON으로 변환하여 응답
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -69,7 +68,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setStatus(401);
 
         // 응답 생성
-        LoginFailResponse loginFailResponse = new LoginFailResponse("로그인 성공", HttpStatus.OK.value());
+        CommonResponseDto loginFailResponse = new CommonResponseDto(HttpStatus.OK.value(), null);
         // JSON으로 변환하여 응답
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

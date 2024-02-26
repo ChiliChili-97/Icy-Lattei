@@ -27,10 +27,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody SignupRequest request) throws Exception{
+    public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody SignupRequest request)
+        throws Exception {
         userService.signup(request);
         return ResponseEntity.status(HttpStatus.CREATED.value())
-            .body(new CommonResponseDto("회원가입 성공", HttpStatus.CREATED.value(), null));
+            .body(new CommonResponseDto(HttpStatus.CREATED.value(), null));
     }
 
     @GetMapping("/logout")
@@ -39,6 +40,6 @@ public class UserController {
             SecurityContextHolder.getContext().getAuthentication());
 
         return ResponseEntity.status(HttpStatus.OK.value())
-            .body(new CommonResponseDto("로그아웃 성공", HttpStatus.OK.value(), null));
+            .body(new CommonResponseDto(HttpStatus.OK.value(), null));
     }
 }
