@@ -27,7 +27,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody SignupRequest request) {
+    public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody SignupRequest request) throws Exception{
         userService.signup(request);
         return ResponseEntity.status(HttpStatus.CREATED.value())
             .body(new CommonResponseDto("회원가입 성공", HttpStatus.CREATED.value(), null));
