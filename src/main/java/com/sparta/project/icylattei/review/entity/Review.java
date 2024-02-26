@@ -56,4 +56,8 @@ public class Review {
         this.user = user;
         this.product = product;
     }
+
+    public void update(ReviewRequest request) {
+        this.content = request.getContent();
+    }
 }

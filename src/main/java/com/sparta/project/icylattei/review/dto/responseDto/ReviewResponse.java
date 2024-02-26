@@ -22,5 +22,4 @@ public class ReviewResponse {
         this.createdAt = review.getCreatedAt();
         this.modifiedAt = review.getModifiedAt();
     }
-
 }

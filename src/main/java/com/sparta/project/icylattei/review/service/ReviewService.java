@@ -42,6 +42,25 @@ public class ReviewService {
         return responseList;
     }
 
+    public void deleteReview(Long productId, Long reviewId, User user) {
+
+        Review review = validReview(reviewId);
+        confirmMatch(productId, user, review);
+
+        reviewRepository.delete(review);
+    }
+
+    @Transactional
+    public ReviewResponse updateReview(Long productId, Long reviewId, ReviewRequest request,
+        User user) {
+
+        Review review = validReview(reviewId);
+        confirmMatch(productId, user, review);
+        review.update(request);
+
+        return new ReviewResponse(user.getNickname(), review);
+    }
+
     // 검증 메서드 ==================================================================================
 
     private Product validProduct(Long productId) {
@@ -50,5 +69,19 @@ public class ReviewService {
         );
     }
 
+    private Review validReview(Long reviewId) {
+        return reviewRepository.findById(reviewId).orElseThrow(
+            () -> new IllegalArgumentException("존재하지 않는 리뷰입니다.")
+        );
+    }
 
+    private static void confirmMatch(Long productId, User user, Review review) {
+        if (!review.getProduct().getProductId().equals(productId)) {
+            throw new IllegalArgumentException("리뷰와 상품의 정보가 일치하지 않습니다.");
+        }
+
+        if (!review.getUser().equals(user)) {
+            throw new IllegalArgumentException("내가 작성한 리뷰가 아닙니다.");
+        }
+    }
 }
