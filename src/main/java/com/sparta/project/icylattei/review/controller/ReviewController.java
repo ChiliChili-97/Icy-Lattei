@@ -51,7 +51,7 @@ public class ReviewController {
     // 리뷰 수정
     @PutMapping("/reviews/{reviewId}")
     public ReviewResponse updateReview(@PathVariable Long productId, @PathVariable Long reviewId,
-        @RequestBody ReviewRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        @RequestBody @Valid ReviewRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return reviewService.updateReview(productId, reviewId, request, userDetails.getUser());
     }
