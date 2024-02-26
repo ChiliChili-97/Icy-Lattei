@@ -24,33 +24,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("users/orders")
 public class OrderController {
+
     private final OrderService orderService;
 
-//    @PostMapping
+    //    @PostMapping
 //    public OrderResponseDto createOrder(@AuthenticationPrincipal UserDetailsImpl userDetails,
 //        @RequestBody OrderRequestDto requestDto){
 //        return orderService.createOrder(requestDto, userDetails.getUser());
 //    }
     @PostMapping
-    public OrderResponseDto createOrder(@RequestBody OrderRequestDto requestDto){
+    public OrderResponseDto createOrder(@RequestBody OrderRequestDto requestDto) {
         return orderService.createOrder(requestDto);
     }
 
     @GetMapping //전체
-    public OrdersResponseDto getOrders(){
+    public OrdersResponseDto getOrders() {
         return orderService.getOrders();
     }
 
     @PutMapping("/{orderId}")
-    public ResponseEntity<OrderHttpResponseDto> updateOrder(@AuthenticationPrincipal UserDetailsImpl userDetails,
-        @PathVariable Long orderId, @RequestBody OrderRequestDto requestDto){
+    public ResponseEntity<OrderHttpResponseDto> updateOrder(
+        @AuthenticationPrincipal UserDetailsImpl userDetails,
+        @PathVariable Long orderId, @RequestBody OrderRequestDto requestDto) {
         orderService.updateOrder(orderId, userDetails.getUser(), requestDto);
         return ResponseEntity.ok().body(new OrderHttpResponseDto(HttpStatus.OK));
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<OrderHttpResponseDto> deleteOrder(@AuthenticationPrincipal UserDetailsImpl userDetails,
-        @PathVariable Long orderId){
+    public ResponseEntity<OrderHttpResponseDto> deleteOrder(
+        @AuthenticationPrincipal UserDetailsImpl userDetails,
+        @PathVariable Long orderId) {
         orderService.deleteOrder(orderId, userDetails.getUser());
         return ResponseEntity.ok().body(new OrderHttpResponseDto(HttpStatus.OK));
 
