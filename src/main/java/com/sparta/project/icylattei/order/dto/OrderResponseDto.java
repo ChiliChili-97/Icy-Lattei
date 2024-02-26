@@ -19,7 +19,7 @@ public class OrderResponseDto {
 
 
     public OrderResponseDto(Order order) {
-        this.id = order.getId();
+        this.id = order.getOrderId();
         this.orderDate = order.getOrderDate();
         for(int i = 0; i < carts.size(); i++){
             this.totalPrice += carts.get(i).getQuantity() * carts.get(i).getProduct().getPrice();
