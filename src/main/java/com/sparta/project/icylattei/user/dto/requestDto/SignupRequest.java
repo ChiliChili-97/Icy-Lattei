@@ -11,13 +11,13 @@ import lombok.Setter;
 public class SignupRequest {
 
     @NotBlank(message =  "아이디는 필수로 입력해야 합니다.")
-    @Size(max = 10, message = "아이디는 4자 이상 10자 이하여야 합니다.")
-    @Pattern(regexp = "^[a-z0-9]{4,10}$")
+    @Size(min = 4, max = 10, message = "아이디는 4자 이상 10자 이하여야 합니다.")
+    @Pattern(regexp = "^[a-z0-9]+$")
     private String username;
 
     @NotBlank(message = "비밀번호는 필수로 입력해야 합니다.")
-    @Size(max = 15, message = "비밀번호는 8자 이상 15자 이하여야 합니다.")
-    @Pattern(regexp = "^[a-zA-Z0-9]{4,10}$")
+    @Size(min = 8, max = 15, message = "비밀번호는 8자 이상 15자 이하여야 합니다.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$")
     private String password;
 
     @Size(max = 10, message = "nickname은 10자 이하여야 합니다.")
