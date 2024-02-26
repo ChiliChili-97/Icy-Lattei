@@ -27,19 +27,16 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    //    @PostMapping
-//    public OrderResponseDto createOrder(@AuthenticationPrincipal UserDetailsImpl userDetails,
-//        @RequestBody OrderRequestDto requestDto){
-//        return orderService.createOrder(requestDto, userDetails.getUser());
-//    }
     @PostMapping
-    public OrderResponseDto createOrder(@RequestBody OrderRequestDto requestDto) {
-        return orderService.createOrder(requestDto);
+    public OrderResponseDto createOrder(@AuthenticationPrincipal UserDetailsImpl userDetails,
+        @RequestBody OrderRequestDto requestDto) {
+        return orderService.createOrder(requestDto, userDetails.getUser());
     }
 
-    @GetMapping //전체
-    public OrdersResponseDto getOrders() {
-        return orderService.getOrders();
+
+    @GetMapping //내꺼 전체
+    public OrdersResponseDto getOrders(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return orderService.getOrders(userDetails.getUser());
     }
 
     @PutMapping("/{orderId}")

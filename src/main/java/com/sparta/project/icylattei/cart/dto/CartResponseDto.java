@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartResponseDto {
     private Long id;
-    private Product products;
+    private Product product;
     private Integer quantity;
 
 
     public CartResponseDto(Cart cart) {
         this.id = cart.getCartId();
-        this.products = cart.getProduct();
+        this.product = cart.getProduct();
         this.quantity = cart.getQuantity();
     }
 }

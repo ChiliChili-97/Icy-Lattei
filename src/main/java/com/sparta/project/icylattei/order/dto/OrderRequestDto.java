@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class OrderRequestDto {
-    private List<Cart> cart;
+    private List<Long> carts;
 }

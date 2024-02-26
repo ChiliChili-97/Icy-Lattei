@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class CartRequestDto {
-    private Product product;
+    private String productName;
     private int quantity;
     private String cartStatus;
 

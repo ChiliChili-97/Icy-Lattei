@@ -33,13 +33,18 @@ public class Order {
     @OneToMany
     private List<Cart> carts = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     @Column(nullable = true)
     private Date orderDate;
 
-    public Order(OrderRequestDto requestDto) {
-        this.carts = requestDto.getCart();
+    public Order(List<Cart> carts, User user) {
+        this.carts = carts;
+        this.user = user;
     }
 
-    public void update(OrderRequestDto requestDto) {
+    public void update(List<Cart> carts) {
+        this.carts = carts;
     }
 }

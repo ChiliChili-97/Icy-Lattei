@@ -30,7 +30,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -44,15 +44,15 @@ public class Cart {
     @Column(nullable = false)
     private String cartStatus;
 
-    public Cart(CartRequestDto requestDto, User user) {
+    public Cart(Product product, CartRequestDto requestDto, User user) {
         this.user = user;
-        this.product = requestDto.getProduct();
+        this.product = product;
         this.quantity = requestDto.getQuantity();
         this.cartStatus = requestDto.getCartStatus();
     }
 
-    public void update(CartRequestDto requestDto) {
-        this.product = requestDto.getProduct();
+    public void update(Product product, CartRequestDto requestDto) {
+        this.product = product;
         this.quantity = requestDto.getQuantity();
         this.cartStatus = requestDto.getCartStatus();
     }

@@ -6,6 +6,8 @@ import com.sparta.project.icylattei.cart.dto.CartRequestDto;
 import com.sparta.project.icylattei.cart.dto.CartResponseDto;
 import com.sparta.project.icylattei.cart.dto.CartsResponseDto;
 import com.sparta.project.icylattei.cart.service.CartService;
+import com.sparta.project.icylattei.product.entity.Product;
+import com.sparta.project.icylattei.product.repository.ProductRepository;
 import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.userDetails.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
