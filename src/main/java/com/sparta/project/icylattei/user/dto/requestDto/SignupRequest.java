@@ -1,6 +1,7 @@
 package com.sparta.project.icylattei.user.dto.requestDto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class SignupRequest {
     @Pattern(regexp = "^[a-zA-Z0-9]{8,15}$", message = "비밀번호는 영어 대문자 및 소문자, 숫자(0~9)로 구성되어야 하며, 8자 이상 15자 이하여야 합니다.")
     private String password;
 
-    @NotBlank
+    @NotNull
     private boolean admin = false;
 
     @NotBlank

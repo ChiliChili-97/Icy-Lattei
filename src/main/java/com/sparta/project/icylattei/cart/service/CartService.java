@@ -18,17 +18,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CartService {
     private final CartRepository cartRepository;
-    private final UserRepository userRepository;
 
-    public CartResponseDto createCart(CartRequestDto requestDto) {
-        User user = userRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("찾을 수 없다."));
+    public CartResponseDto createCart(CartRequestDto requestDto, User user) {
         Cart cart = cartRepository.save(new Cart(requestDto, user));
         return new CartResponseDto(cart);
     }
 
-    public CartsResponseDto getCart() {
-        List<Cart> cart = cartRepository.findAll();
-//        List<Cart> cart = cartRepository.findAllByUserAndCartStatus(user, "장바구니");
+    public CartsResponseDto getCart(User user) {
+        List<Cart> cart = cartRepository.findAllByUserAndCartStatus(user, "장바구니");
         return new CartsResponseDto(cart);
     }
 

@@ -27,24 +27,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CartController {
     private final CartService cartService;
 
-//    @PostMapping
-//    public CartResponseDto createCart(@AuthenticationPrincipal UserDetailsImpl userDetails,
-//        @RequestBody CartRequestDto requestDto){
-//        return cartService.createCart(requestDto, userDetails.getUser());
-//    }
     @PostMapping
-    public CartResponseDto createCart(
+    public CartResponseDto createCart(@AuthenticationPrincipal UserDetailsImpl userDetails,
         @RequestBody CartRequestDto requestDto){
-        return cartService.createCart(requestDto);
+        return cartService.createCart(requestDto, userDetails.getUser());
     }
-//    @GetMapping
-//    public CartsResponseDto getCart(@AuthenticationPrincipal UserDetailsImpl userDetails){
-//        return cartService.getCart(userDetails.getUser());
-//    }
+
     @GetMapping
-    public CartsResponseDto getCart(){
-        return cartService.getCart();
+    public CartsResponseDto getCart(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return cartService.getCart(userDetails.getUser());
     }
+
     @PutMapping("/{cartId}")
     public ResponseEntity<CartHttpResponseDto> updateCart(@PathVariable Long cartId, @AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CartRequestDto requestDto){
         cartService.updateCart(cartId, requestDto, userDetails.getUser());
