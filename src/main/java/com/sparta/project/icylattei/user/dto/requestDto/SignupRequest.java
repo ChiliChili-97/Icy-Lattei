@@ -20,8 +20,5 @@ public class SignupRequest {
     @Pattern(regexp = "^[a-zA-Z0-9]+$")
     private String password;
 
-    @Size(max = 10, message = "nickname은 10자 이하여야 합니다.")
-    private String nickname;
-
 }
 
