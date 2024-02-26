@@ -10,9 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Getter
-public record UserDetailsImpl(User user) implements UserDetails {
 
+public class UserDetailsImpl implements UserDetails {
+
+    private User user;
+    public User getUser() {
+        return user;
+    }
     @Override
     public String getPassword() {
         return user.getPassword();
