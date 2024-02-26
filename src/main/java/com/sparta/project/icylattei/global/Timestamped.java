@@ -1,4 +1,4 @@
-package com.sparta.project.icylattei.user.entity;
+package com.sparta.project.icylattei.global;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

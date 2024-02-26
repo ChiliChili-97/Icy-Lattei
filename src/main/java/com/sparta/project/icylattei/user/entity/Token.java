@@ -1,5 +1,6 @@
 package com.sparta.project.icylattei.user.entity;
 
+import com.sparta.project.icylattei.global.Timestamped;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

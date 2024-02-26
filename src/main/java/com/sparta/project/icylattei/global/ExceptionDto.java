@@ -1,4 +1,4 @@
-package com.sparta.project.icylattei.user.dto;
+package com.sparta.project.icylattei.global;
 
 import lombok.Builder;
 import lombok.Getter;

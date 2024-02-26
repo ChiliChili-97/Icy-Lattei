@@ -1,6 +1,5 @@
-package com.sparta.project.icylattei.user.dto;
+package com.sparta.project.icylattei.user.dto.responseDto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommonResponseDto<T> {
+public class LoginFailResponseDto {
 
     private String message;
     private Integer statusCode;
-    private T data;
 
 }

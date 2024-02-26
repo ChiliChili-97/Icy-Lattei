@@ -1,7 +1,7 @@
 package com.sparta.project.icylattei.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.project.icylattei.user.dto.ExceptionDto;
+import com.sparta.project.icylattei.global.ExceptionDto;
 import com.sparta.project.icylattei.userDetails.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -34,6 +34,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -45,30 +46,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 log.error("토큰 에러");
                 return;
             }
-
-            try {
-                userDetailsService.validateToken(tokenValue);
-            } catch (LoginException e) {
-                log.error(e.getMessage());
-
-                response.setStatus(400);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("utf-8");
-
-                ExceptionDto exceptionDto = ExceptionDto.builder()
-                    .statusCode(HttpStatus.BAD_REQUEST.value())
-                    .state(HttpStatus.BAD_REQUEST)
-                    .message("이미 로그아웃 처리된 토큰입니다. 다시 로그인하세요.")
-                    .build();
-
-                String exception = objectMapper.writeValueAsString(exceptionDto);
-                response.getWriter().write(exception);
-                return;
-            }
-
-
-
-
 
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
 
@@ -82,7 +59,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-
     public void setAuthentication(String username) {
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         Authentication authentication = createAuthentication(username);
