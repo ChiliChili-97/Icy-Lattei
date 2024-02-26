@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({IllegalArgumentException.class, DuplicateKeyException.class})
+    @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<String> handleException(Exception e ){
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST.value())
+            .body(e.getMessage());
+    }
+
+    @ExceptionHandler({DuplicateKeyException.class})
+    public ResponseEntity<String> handleDuplicateException(Exception e ){
+        return ResponseEntity
+            .status(HttpStatus.CONFLICT.value())
             .body(e.getMessage());
     }
 }
