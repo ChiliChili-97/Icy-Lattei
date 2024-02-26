@@ -11,12 +11,13 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Table(name = "PRODUCT")
 @NoArgsConstructor
-@Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long productId;
 
     @Column(nullable = false)
     private String productName;
@@ -25,3 +26,4 @@ public class Product {
     private int price;
 
 }
+

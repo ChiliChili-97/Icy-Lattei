@@ -4,13 +4,17 @@ import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import java.util.ArrayList;
 import java.util.Collection;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+public class UserDetailsImpl implements UserDetails {
 
-public record UserDetailsImpl(User user) implements UserDetails {
+    private final User user;
+
+    public UserDetailsImpl(User user) {
+        this.user = user;
+    }
 
     public User getUser() {
         return user;
