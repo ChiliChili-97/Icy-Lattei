@@ -38,11 +38,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(@RequestBody SignupRequest request, HttpServletRequest httpServletRequest, HttpServletResponse response, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-        userService.logout(userDetails, request);
-
-        new SecurityContextLogoutHandler().logout(httpServletRequest, response, SecurityContextHolder.getContext().getAuthentication());
+    public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response,
+            SecurityContextHolder.getContext().getAuthentication());
 
         return ResponseEntity.status(HttpStatus.OK.value())
             .body(new CommonResponseDto(HttpStatus.OK.value(), null));

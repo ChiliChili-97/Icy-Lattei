@@ -56,21 +56,4 @@ public class UserService {
         return role;
 
     }
-
-    public void logout(@AuthenticationPrincipal UserDetailsImpl userDetails, SignupRequest request) {
-        // 토큰으로 id 가져오기
-        String username = userDetails.getUser().getUsername();
-
-        // DB에 접근
-        User user = userRepository.findByUsername(username)
-            .orElseThrow(() -> new IllegalArgumentException("선택한 유저가 존재하지 않습니다."));
-
-        if (!username.equals(request.getUsername())){
-            throw new IllegalArgumentException("본인만 로그아웃할 수 있습니다.");
-        }
-
-
-    }
-
-
 }

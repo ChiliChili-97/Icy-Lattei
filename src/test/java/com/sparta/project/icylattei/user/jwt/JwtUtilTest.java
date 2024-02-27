@@ -1,4 +1,4 @@
-package com.sparta.project.icylattei.jwt;
+package com.sparta.project.icylattei.user.jwt;
 
 import static com.sparta.project.icylattei.jwt.JwtUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 
+import com.sparta.project.icylattei.jwt.JwtUtil;
 import com.sparta.project.icylattei.test.UserCommonTest;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,7 +30,8 @@ class JwtUtilTest implements UserCommonTest {
     @Mock
     private HttpServletRequest request;
 
-    @BeforeEach  // 각각의 테스트 코드를 실행하기 전에 실행하겠다.
+    @BeforeEach
+        // 각각의 테스트 코드를 실행하기 전에 실행하겠다.
     void setUp() {
         jwtUtil.init();  // secretkey 값 설정
     }
@@ -48,7 +50,7 @@ class JwtUtilTest implements UserCommonTest {
     @Test
     void resolveToken() {
         // given
-        var token =  TOKEN;
+        var token = TOKEN;
         String baearerToken = BEARER_PREFIX + token;
 
         // when
@@ -80,10 +82,11 @@ class JwtUtilTest implements UserCommonTest {
         @Test
         void validateToken_fail() {
             // given
-            String invalidToken =  INVALID_TOKEN;
+            String invalidToken = INVALID_TOKEN;
 
             // when
-            boolean isValid = jwtUtil.validateToken(invalidToken);  // isValid가 false 일테니 assertFalse로 확인한다.
+            boolean isValid = jwtUtil.validateToken(
+                invalidToken);  // isValid가 false 일테니 assertFalse로 확인한다.
 
             // then
             assertFalse(isValid);

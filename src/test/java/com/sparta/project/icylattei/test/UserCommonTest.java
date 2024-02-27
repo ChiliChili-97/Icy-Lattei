@@ -5,6 +5,7 @@ import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 
 public interface UserCommonTest {
+
     String ANOTHER_PREFIX = "another-";
     Long TEST_USER_ID = 1L;
     Long TEST_ANOTHER_USER_ID = 2L;

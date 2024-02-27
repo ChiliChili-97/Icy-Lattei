@@ -37,16 +37,20 @@ class UserServiceTest implements UserCommonTest {
     @Test
     void signup() {
         // given
-        given(userRepository.findByUsername(anyString())).willReturn(Optional.empty());  // findByUserName 메서드가 호출되면, emty가 반환될거다. 즉, 중복된 사용자가 없다는 뜻
-        given(passwordEncoder.encode(anyString())).willReturn("encodedPassword");  // 비밀번호 정상적으로 인코딩 가정
+        given(userRepository.findByUsername(anyString())).willReturn(
+            Optional.empty());  // findByUserName 메서드가 호출되면, emty가 반환될거다. 즉, 중복된 사용자가 없다는 뜻
+        given(passwordEncoder.encode(anyString())).willReturn(
+            "encodedPassword");  // 비밀번호 정상적으로 인코딩 가정
 
         var testUser = UserTestUtils.get(TEST_USER);
         given(userRepository.save(any())).willReturn(testUser);   // 정상적으로 DB에 저장
 
         // when, then
-        assertDoesNotThrow(() -> userService.signup(TEST_USER_REQUEST_DTO));  // 회원가입 성공시 어떠한 Exception도 던져지지 않는다.
+        assertDoesNotThrow(
+            () -> userService.signup(TEST_USER_REQUEST_DTO));  // 회원가입 성공시 어떠한 Exception도 던져지지 않는다.
 
-        verify(userRepository, times(1)).findByUsername(anyString());
+        verify(userRepository, times(1)).findByUsername(
+            anyString());  // findByUsername 메서드가 한번 호출되었는지 확인
         verify(userRepository, times(1)).save(any());
     }
 

@@ -33,6 +33,7 @@ class SignupRequestTest implements UserCommonTest {
             // then
             assertThat(violations).isEmpty();
         }
+
         @DisplayName("회원가입 요청 Dto 생성 실패 - 잘못된 username")
         @Test
         void createSignupRequestDto_fail_wrongUserName() {
@@ -87,7 +88,7 @@ class SignupRequestTest implements UserCommonTest {
                 .contains(TEST_USER_NICKNAME_MESSAGE);
         }
 
-        private Set<ConstraintViolation<SignupRequest>> validate(SignupRequest request){
+        private Set<ConstraintViolation<SignupRequest>> validate(SignupRequest request) {
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
             return validator.validate(request);
