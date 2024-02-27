@@ -1,12 +1,21 @@
 package com.sparta.project.icylattei.user.service;
 
+import com.sparta.project.icylattei.password.entity.PasswordHistory;
+import com.sparta.project.icylattei.password.repository.PasswordHistoryRepository;
+import com.sparta.project.icylattei.user.dto.requestDto.PasswordUpdateRequest;
+import com.sparta.project.icylattei.user.dto.requestDto.ProfileRequest;
 import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
+import com.sparta.project.icylattei.user.dto.responseDto.ProfileResponse;
 import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import com.sparta.project.icylattei.user.repository.UserRepository;
+import com.sparta.project.icylattei.userDetails.UserDetailsImpl;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordHistoryRepository passwordHistoryRepository;
     private final PasswordEncoder passwordEncoder;
 
     // ADMIN_TOKEN
@@ -36,6 +46,34 @@ public class UserService {
         User user = new User(username, password, role, nickname);
         userRepository.save(user);
     }
+
+    // 프로필 조회
+    public ProfileResponse getProfile(UserDetailsImpl userDetails) {
+        // UserId 가져오기
+        Long userId = userDetails.getUser().getId();
+        // DB 확인
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("사용자가 존재하지 않습니다."));
+
+        return new ProfileResponse(user);
+    }
+
+    // 프로필 수정
+    @Transactional
+    public ProfileResponse updateProfile(UserDetailsImpl userDetails, ProfileRequest request) {
+        // UserId 가져오기
+        Long userId = userDetails.getUser().getId();
+        // DB 확인
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("사용자가 존재하지 않습니다"));
+
+        user.update(request.getNickname(), request.getInfo());
+
+        return new ProfileResponse(user);
+    }
+
+
+
 
     private void validateUserDuplicate(Optional<User> checkUsername) {
         if (checkUsername.isPresent()) {
