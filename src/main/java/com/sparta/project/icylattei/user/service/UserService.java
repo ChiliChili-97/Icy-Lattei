@@ -101,13 +101,6 @@ public class UserService {
                }
            }
         }
-
-
-
-
-
-
-
     }
 
     private void validateNewPassword(String newPassword, String currentPassword) {

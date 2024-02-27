@@ -33,11 +33,10 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-      public void signup(@Valid @RequestBody SignupRequest request) {
+    public void signup(@Valid @RequestBody SignupRequest request) {
 
         userService.signup(request);
-      }
-
+    }
 
     @PostMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
