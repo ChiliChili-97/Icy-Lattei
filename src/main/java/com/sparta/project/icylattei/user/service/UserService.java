@@ -31,7 +31,8 @@ public class UserService {
         // 중복된 사용자 확인
         validateUserDuplicate(userRepository.findByUsername(username));
         // 사용자 ROLE 확인
-        UserRoleEnum role = validateUserRole(request, UserRoleEnum.USER);
+        UserRoleEnum role =  UserRoleEnum.USER;
+        role = validateUserRole(request, role);
 
         User user = new User(username, password, role, nickname);
         userRepository.save(user);
