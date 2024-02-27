@@ -33,21 +33,16 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<CommonResponseDto<String>> signup(
-        @Valid @RequestBody SignupRequest request) {
-        userService.signup(request);
-        return ResponseEntity.status(HttpStatus.CREATED.value())
-            .body(new CommonResponseDto<>(HttpStatus.CREATED.value(), "회원가입 성공"));
-    }
+      public void signup(@Valid @RequestBody SignupRequest request) {
 
-    @GetMapping("/logout")
-    public ResponseEntity<CommonResponseDto<String>> logout(HttpServletRequest request,
-        HttpServletResponse response) {
+        userService.signup(request);
+      }
+
+
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response,
             SecurityContextHolder.getContext().getAuthentication());
-
-        return ResponseEntity.status(HttpStatus.OK.value())
-            .body(new CommonResponseDto<>(HttpStatus.OK.value(), "로그아웃 성공"));
     }
 
     @GetMapping
