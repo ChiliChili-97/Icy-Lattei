@@ -1,16 +1,13 @@
 package com.sparta.project.icylattei.order.service;
 
-import com.sparta.project.icylattei.cart.dto.CartResponseDto;
 import com.sparta.project.icylattei.cart.entity.Cart;
 import com.sparta.project.icylattei.cart.repository.CartRepository;
 import com.sparta.project.icylattei.order.dto.OrderRequestDto;
 import com.sparta.project.icylattei.order.dto.OrderResponseDto;
-import com.sparta.project.icylattei.order.dto.OrderUpdateRequestDto;
 import com.sparta.project.icylattei.order.dto.OrdersResponseDto;
 import com.sparta.project.icylattei.order.entity.Order;
 import com.sparta.project.icylattei.order.repository.OrderRepository;
 import com.sparta.project.icylattei.user.entity.User;
-import com.sparta.project.icylattei.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;

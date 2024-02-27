@@ -34,7 +34,7 @@ public class OrderController {
     }
 
 
-    @GetMapping //내꺼 전체
+    @GetMapping
     public OrdersResponseDto getOrders(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return orderService.getOrders(userDetails.getUser());
     }

@@ -26,7 +26,6 @@ public class CartService {
     public CartResponseDto createCart(CartRequestDto requestDto, User user) {
         String productName = requestDto.getProductName();
         Product product = productRepository.findByProductName(productName);
-        System.out.println(product);
         Cart cart = cartRepository.save(new Cart(product, requestDto, user));
         return new CartResponseDto(cart);
     }
