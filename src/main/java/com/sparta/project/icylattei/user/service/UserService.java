@@ -15,7 +15,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,9 +48,8 @@ public class UserService {
 
     // 프로필 조회
     public ProfileResponse getProfile(UserDetailsImpl userDetails) {
-        // UserId 가져오기
         Long userId = userDetails.getUser().getId();
-        // DB 확인
+
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("사용자가 존재하지 않습니다."));
 
@@ -61,9 +59,8 @@ public class UserService {
     // 프로필 수정
     @Transactional
     public ProfileResponse updateProfile(UserDetailsImpl userDetails, ProfileRequest request) {
-        // UserId 가져오기
         Long userId = userDetails.getUser().getId();
-        // DB 확인
+
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("사용자가 존재하지 않습니다"));
 
@@ -72,8 +69,51 @@ public class UserService {
         return new ProfileResponse(user);
     }
 
+    // 비밀번호 변경
+    @Transactional
+    public void updatePassword(UserDetailsImpl userDetails, PasswordUpdateRequest request) {
+        Long userId = userDetails.getUser().getId();
+
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("사용자가 존재하지 않습니다."));
+
+        String currentPassword = user.getPassword();
+        String newPassword = request.getPassword();
+
+        validateNewPassword(newPassword, currentPassword);
+
+        List<PasswordHistory> recentPassword =
+            passwordHistoryRepository.findTop3ByUserOrderByCreatedAtDesc(user);
+
+        if(recentPassword.isEmpty()) {
+            PasswordHistory passwordHistory = new PasswordHistory(currentPassword, user);
+
+            passwordHistoryRepository.save(passwordHistory);
+
+            user.updatePassword(passwordEncoder.encode(request.getPassword()));
+        }
+
+        if(!recentPassword.isEmpty()) {
+           for(PasswordHistory password: recentPassword) {
+               if(passwordEncoder.matches(newPassword, password.getPastPassword())) {
+                   throw new DuplicateKeyException("사용했던 비밀번호입니다. 새로운 비밀번호를 입력해주세요.");
+               }
+           }
+        }
 
 
+
+
+
+
+
+    }
+
+    private void validateNewPassword(String newPassword, String currentPassword) {
+        if(passwordEncoder.matches(newPassword, currentPassword))
+            throw new IllegalArgumentException("기존 비밀번호와 동일합니다.");
+
+    }
 
     private void validateUserDuplicate(Optional<User> checkUsername) {
         if (checkUsername.isPresent()) {

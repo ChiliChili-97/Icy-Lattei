@@ -34,5 +34,9 @@ public class PasswordHistory {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public PasswordHistory(String pastPassword, User user) {
+        this.pastPassword = pastPassword;
+        this.user = user;
+    }
 }
 

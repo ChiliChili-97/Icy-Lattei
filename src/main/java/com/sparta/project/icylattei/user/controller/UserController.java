@@ -61,5 +61,13 @@ public class UserController {
         return userService.updateProfile(userDetails, request);
     }
 
+    @PutMapping("/password")
+    public ResponseEntity<CommonResponseDto<String>> updatePassword(
+        @AuthenticationPrincipal UserDetailsImpl userDetails,
+        @RequestBody PasswordUpdateRequest request) {
 
+        userService.updatePassword(userDetails, request);
+        return ResponseEntity.status(HttpStatus.OK.value())
+            .body(new CommonResponseDto<>(HttpStatus.OK.value(), "비밀번호 수정완료"));
+    }
 }

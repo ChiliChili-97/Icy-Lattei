@@ -58,6 +58,10 @@ public class User {
         this.nickname = nickname;
         this.info = info;
     }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }
 
 
