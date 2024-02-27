@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.project.icylattei.cart.dto.CartRequestDto;
 import com.sparta.project.icylattei.cart.service.CartService;
 import com.sparta.project.icylattei.config.WebSecurityConfig;
+import com.sparta.project.icylattei.filter.MockSpringSecurityFilter;
 import com.sparta.project.icylattei.jwt.JwtAuthenticationFilter;
 import com.sparta.project.icylattei.jwt.JwtUtil;
 import com.sparta.project.icylattei.user.controller.UserController;
@@ -102,4 +103,5 @@ public class CartControllerTest {
             .andExpect(status().isOk())
             .andDo(print());
     }
+
 }

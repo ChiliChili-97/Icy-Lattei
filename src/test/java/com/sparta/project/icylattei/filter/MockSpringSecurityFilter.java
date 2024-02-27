@@ -1,4 +1,4 @@
-package com.sparta.project.icylattei.cart.controller;
+package com.sparta.project.icylattei.filter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
