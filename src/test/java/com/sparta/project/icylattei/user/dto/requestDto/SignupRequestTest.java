@@ -25,6 +25,7 @@ class SignupRequestTest implements CommonTest {
             SignupRequest request = new SignupRequest();
             request.setUsername(TEST_USER_NAME);
             request.setPassword(TEST_USER_PASSWORD);
+            request.setNickname(TEST_USER_NICKNAME);
 
             // when
             Set<ConstraintViolation<SignupRequest>> violations = validate(request);
@@ -39,6 +40,7 @@ class SignupRequestTest implements CommonTest {
             SignupRequest request = new SignupRequest();
             request.setUsername(TEST_WRONG_USER_NAME);
             request.setPassword(TEST_USER_PASSWORD);
+            request.setNickname(TEST_USER_NICKNAME);
 
             // when
             Set<ConstraintViolation<SignupRequest>> violations = validate(request);
@@ -56,6 +58,7 @@ class SignupRequestTest implements CommonTest {
             SignupRequest request = new SignupRequest();
             request.setUsername(TEST_USER_NAME);
             request.setPassword(TEST_WRONG_USER_PASSWORD);
+            request.setNickname(TEST_USER_NICKNAME);
 
             // when
             Set<ConstraintViolation<SignupRequest>> violations = validate(request);
@@ -66,6 +69,23 @@ class SignupRequestTest implements CommonTest {
                 .contains(TEST_USER_PASSWORD_MESSAGE);
         }
 
+        @DisplayName("회원가입 요청 Dto 생성 실패 - 잘못된 nickname")
+        @Test
+        void createSignupRequestDto_fail_wrongNickName() {
+            // given
+            SignupRequest request = new SignupRequest();
+            request.setUsername(TEST_USER_NAME);
+            request.setPassword(TEST_USER_PASSWORD);
+            request.setNickname(TEST_WRONG_USER_NICKNAME);
+
+            // when
+            Set<ConstraintViolation<SignupRequest>> violations = validate(request);
+
+            // then
+            assertThat(violations).hasSize(1)
+                .extracting("message")
+                .contains(TEST_USER_NICKNAME_MESSAGE);
+        }
 
         private Set<ConstraintViolation<SignupRequest>> validate(SignupRequest request){
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

@@ -9,13 +9,16 @@ public interface CommonTest {
     Long TEST_ANOTHER_USER_ID = 2L;
 
     UserRoleEnum USER_ROLE = UserRoleEnum.USER;
-    String TEST_USER_NAME = "username";
+    String TEST_USER_NAME = "username12";
     String TEST_WRONG_USER_NAME = "Invalid username";
-    String TEST_USER_PASSWORD = "password";
+    String TEST_USER_PASSWORD = "password12^^";
     String TEST_WRONG_USER_PASSWORD = "Invalid password";
+    String TEST_USER_NICKNAME = "nickname";
+    String TEST_WRONG_USER_NICKNAME = "12345";
 
-    String TEST_USER_NAME_MESSAGE = "아이디는 영어 소문자와, 숫자(0~9)로 구성되어야 하며, 4자 이상 10자 이하여야 합니다.";
-    String TEST_USER_PASSWORD_MESSAGE = "비밀번호는 영어 대문자 및 소문자, 숫자(0~9)로 구성되어야 하며, 8자 이상 15자 이하여야 합니다.";
+    String TEST_USER_NAME_MESSAGE = "아이디는 최소 4자 이상, 10자 이하로 알파벳 소문자와 숫자로 구성되어야 합니다.";
+    String TEST_USER_PASSWORD_MESSAGE = "비밀번호는 최소 8자 이상, 15자 이하로 알파벳과 특수문자, 숫자로 구성되어야 합니다.";
+    String TEST_USER_NICKNAME_MESSAGE = "닉네임은 2~10자로 구성되어야 하며, 숫자로만 구성될 수 없습니다.";
 
     String TOKEN = "test-token";
     String INVALID_TOKEN = "invalid-token";
