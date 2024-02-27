@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 
-import com.sparta.project.icylattei.test.CommonTest;
+import com.sparta.project.icylattei.test.UserCommonTest;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test") // value어노테이션 정보를 가져올 수 있게 하고, test가 붙은 설정을 가지고 옴 "application-test.properties"
-class JwtUtilTest implements CommonTest {
+class JwtUtilTestUser implements UserCommonTest {
 
     @Autowired
     JwtUtil jwtUtil;

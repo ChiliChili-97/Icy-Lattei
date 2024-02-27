@@ -2,7 +2,7 @@ package com.sparta.project.icylattei.user.dto.requestDto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import com.sparta.project.icylattei.test.CommonTest;
+import com.sparta.project.icylattei.test.UserCommonTest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class SignupRequestTest implements CommonTest {
+class SignupRequestTestUser implements UserCommonTest {
 
     @DisplayName("회원가입 요청 Dto 생성")
     @Nested
