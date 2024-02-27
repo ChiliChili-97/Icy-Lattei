@@ -1,14 +1,11 @@
 package com.sparta.project.icylattei.user.controller;
 
-import com.sparta.project.icylattei.global.dto.CommonResponseDto;
 import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
 import com.sparta.project.icylattei.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;

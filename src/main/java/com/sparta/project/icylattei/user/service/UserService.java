@@ -4,12 +4,9 @@ import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
 import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import com.sparta.project.icylattei.user.repository.UserRepository;
-import com.sparta.project.icylattei.userDetails.UserDetailsImpl;
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +28,7 @@ public class UserService {
         String password = passwordEncoder.encode(request.getPassword());
         String nickname = request.getNickname();
 
-       // 중복된 사용자 확인
+        // 중복된 사용자 확인
         validateUserDuplicate(userRepository.findByUsername(username));
         // 사용자 ROLE 확인
         UserRoleEnum role = validateUserRole(request, UserRoleEnum.USER);
@@ -46,7 +43,7 @@ public class UserService {
         }
     }
 
-    private UserRoleEnum validateUserRole(SignupRequest request, UserRoleEnum role){
+    private UserRoleEnum validateUserRole(SignupRequest request, UserRoleEnum role) {
         if (request.isAdmin()) {
             if (!ADMIN_TOKEN.equals(request.getAdminToken())) {
                 throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
