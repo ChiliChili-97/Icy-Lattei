@@ -26,20 +26,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody SignupRequest request) throws Exception {
+    public void signup(@Valid @RequestBody SignupRequest request) throws Exception {
 
         userService.signup(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED.value())
-            .body(new CommonResponseDto(HttpStatus.CREATED.value(), null));
     }
 
     @PostMapping("/logout")
-    public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) {
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response,
             SecurityContextHolder.getContext().getAuthentication());
-
-        return ResponseEntity.status(HttpStatus.OK.value())
-            .body(new CommonResponseDto(HttpStatus.OK.value(), null));
     }
 }
