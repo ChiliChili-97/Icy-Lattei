@@ -5,7 +5,6 @@ import static org.mockito.BDDMockito.doNothing;
 import static org.mockito.BDDMockito.times;
 import static org.mockito.BDDMockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -61,7 +60,7 @@ class UserControllerTest implements UserCommonTest {
     @Test
     void signup() throws Exception {
         // given
-        doNothing().when(userService).signup(TEST_USER_REQUEST_DTO);
+        doNothing().when(userService).signup(TEST_USER_REQUEST_DTO); // doNothing : Mockito 라이브러리 사용, signup메서드 호출시 아무것도 하지 않는다는 뜻
 
         // when
         var action = mockMvc.perform(post("/users/signup")
@@ -78,7 +77,7 @@ class UserControllerTest implements UserCommonTest {
     @Test
     void logout() throws Exception {
         // when
-        var action = mockMvc.perform(get("/users/logout")
+        var action = mockMvc.perform(post("/users/logout")
             .contentType(MediaType.APPLICATION_JSON));
 
         // then
