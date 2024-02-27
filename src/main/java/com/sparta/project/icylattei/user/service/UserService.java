@@ -43,7 +43,7 @@ public class UserService {
         }
     }
 
-    private UserRoleEnum validateUserRole(SignupRequest request, UserRoleEnum role){
+    private UserRoleEnum validateUserRole(SignupRequest request, UserRoleEnum role) {
         if (request.isAdmin()) {
             if (!ADMIN_TOKEN.equals(request.getAdminToken())) {
                 throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
