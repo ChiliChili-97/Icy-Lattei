@@ -4,9 +4,12 @@ import com.sparta.project.icylattei.user.dto.requestDto.SignupRequest;
 import com.sparta.project.icylattei.user.entity.User;
 import com.sparta.project.icylattei.user.entity.UserRoleEnum;
 import com.sparta.project.icylattei.user.repository.UserRepository;
+import com.sparta.project.icylattei.userDetails.UserDetailsImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,4 +56,21 @@ public class UserService {
         return role;
 
     }
+
+    public void logout(@AuthenticationPrincipal UserDetailsImpl userDetails, SignupRequest request) {
+        // 토큰으로 id 가져오기
+        String username = userDetails.getUser().getUsername();
+
+        // DB에 접근
+        User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new IllegalArgumentException("선택한 유저가 존재하지 않습니다."));
+
+        if (!username.equals(request.getUsername())){
+            throw new IllegalArgumentException("본인만 로그아웃할 수 있습니다.");
+        }
+
+
+    }
+
+
 }
