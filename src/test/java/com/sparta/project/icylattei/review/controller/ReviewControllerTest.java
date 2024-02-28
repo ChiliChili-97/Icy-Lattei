@@ -82,7 +82,7 @@ public class ReviewControllerTest {
 
     @Test
     @DisplayName("Create Review : 성공")
-    public void createReview() throws Exception {
+    void createReview() throws Exception {
 
         // given
         this.mockUserSetup();
