@@ -64,7 +64,6 @@ class UserServiceTest implements UserCommonTest {
         // given
         given(userRepository.findByUsername(anyString())).willReturn(
             Optional.of(TEST_DUPLCATE_USER));  // 중복된 사용자만 있다.
-
         // when, then
         assertThrows(DuplicateKeyException.class, () -> userService.signup(TEST_USER_REQUEST_DTO));
     }

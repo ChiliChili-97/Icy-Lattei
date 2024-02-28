@@ -38,5 +38,6 @@ public interface UserCommonTest {
     SignupRequest TEST_USER_REQUEST_DTO = SignupRequest.builder()
         .username(TEST_USER_NAME)
         .password(TEST_USER_PASSWORD)
+        .nickname(TEST_USER_NICKNAME)
         .build();
 }
