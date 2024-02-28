@@ -40,6 +40,8 @@ public class UserService {
 
         // 중복된 사용자 확인
         validateUserDuplicate(userRepository.findByUsername(username));
+        // 중복된 nickName 확인
+        validateNicknameDuplicate(userRepository.findByNickname(nickname));
         // 사용자 ROLE 확인
         UserRoleEnum role =  UserRoleEnum.USER;
         role = validateUserRole(request, role);
@@ -90,6 +92,11 @@ public class UserService {
     private void validateUserDuplicate(Optional<User> checkUsername) {
         if (checkUsername.isPresent()) {
             throw new DuplicateKeyException("중복된 사용자가 존재합니다.");
+        }
+    }
+    private void validateNicknameDuplicate(Optional<User> checkNickname) {
+        if (checkNickname.isPresent()) {
+            throw new DuplicateKeyException("이미 다른 사용자가 해당 nickname을 사용했습니다..");
         }
     }
 
