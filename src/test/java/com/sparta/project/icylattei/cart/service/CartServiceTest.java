@@ -35,10 +35,10 @@ public class CartServiceTest {
         //given
         Long cartId = 1L;
         User user = new User("qwer12345", "qwer@12345", USER, "qwer12345");
-        CartRequestDto cartRequestDto = new CartRequestDto(1L, 3, "장바구니");
+        CartRequestDto cartRequestDto = new CartRequestDto(1L, 3);
         Product product = productRepository.findById(cartRequestDto.getProductId())
             .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
-        Cart cart = new Cart(product, cartRequestDto, user);
+        Cart cart = new Cart(product, cartRequestDto, user, "장바구니");
         CartResponseDto before = new CartResponseDto(cart);
         CartService cartService = new CartService(cartRepository, productRepository);
 
