@@ -46,7 +46,7 @@ public class UserController {
 
     @PutMapping
     public ProfileResponse updateProfile(@AuthenticationPrincipal UserDetailsImpl userDetails,
-        @RequestBody ProfileRequest request) {
+        @Valid @RequestBody ProfileRequest request) {
         return userService.updateProfile(userDetails, request);
     }
 
