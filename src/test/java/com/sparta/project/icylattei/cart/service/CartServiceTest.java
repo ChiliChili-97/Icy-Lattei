@@ -45,7 +45,6 @@ public class CartServiceTest {
         //when
         given(cartRepository.findById(cartId)).willReturn(Optional.of(cart));
         CartResponseDto after = cartService.updateCart(cartId, cartRequestDto, user);
-
         //then
         assertEquals(before.getId(), after.getId());
         assertEquals(before.getQuantity(), after.getQuantity());

@@ -108,10 +108,8 @@ public class CartRepositoryTest {
         //when
         Cart savedCart = cartRepository.findById(cartId)
             .orElseThrow(() -> new IllegalArgumentException("장바구니가 없습니다."));
-
         //then
         assertThat(cart).isEqualTo(savedCart);
-
     }
 
 }
