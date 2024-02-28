@@ -13,8 +13,6 @@ import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +28,9 @@ public class OrderService {
         for (int i = 0; i < requestDto.getCarts().size(); i++) {
             carts.add(cartRepository.findById((long) requestDto.getCarts().get(i))
                 .orElseThrow(() -> new IllegalArgumentException("찾을 수 없습니다.")));
+        }
+        for(Cart cart : carts) {
+            cart.updateStatus("주문");
         }
         Order order = orderRepository.save(new Order(carts, user));
         List<CartResponseDto> cartResponseDtos = new ArrayList<>();
@@ -58,6 +59,7 @@ public class OrderService {
         for (int i = 0; i < requestDto.getCarts().size(); i++) {
             carts.add(cartRepository.findById((long) requestDto.getCarts().get(i))
                 .orElseThrow(() -> new IllegalArgumentException("찾을 수 없습니다.")));
+            carts.get(i).updateStatus("주문");
         }
         Order order = orderRepository.findById(orderId)
             .orElseThrow(() -> new IllegalArgumentException("찾을 수 없습니다."));
@@ -75,5 +77,18 @@ public class OrderService {
             throw new IllegalArgumentException("수정할 수 없습니다.");
         }
         orderRepository.delete(order);
+    }
+
+    public OrderResponseDto getOrder(Long orderId, User user) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("주문이 존재하지 않습니다."));
+        if(!order.getUser().getId().equals(user.getId())){
+            throw new IllegalArgumentException("본인의 주문이 아닙니다.");
+        }
+        List<Cart> carts = order.getCarts();
+        List<CartResponseDto> cartResponseDtos = new ArrayList<>();
+        for (Cart cart : carts) {
+            cartResponseDtos.add(new CartResponseDto(cart));
+        }
+        return new OrderResponseDto(order, cartResponseDtos);
     }
 }
