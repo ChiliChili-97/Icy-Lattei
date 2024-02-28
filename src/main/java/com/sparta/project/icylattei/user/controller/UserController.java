@@ -41,13 +41,13 @@ public class UserController {
 
     @GetMapping
     public ProfileResponse getProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return userService.getProfile(userDetails);
+        return userService.getProfile(userDetails.getUser());
     }
 
     @PutMapping
     public ProfileResponse updateProfile(@AuthenticationPrincipal UserDetailsImpl userDetails,
         @Valid @RequestBody ProfileRequest request) {
-        return userService.updateProfile(userDetails, request);
+        return userService.updateProfile(userDetails.getUser().getUsername(), request);
     }
 
     @PutMapping("/password")
@@ -55,6 +55,6 @@ public class UserController {
         @AuthenticationPrincipal UserDetailsImpl userDetails,
         @Valid @RequestBody PasswordUpdateRequest request) {
 
-        userService.updatePassword(userDetails, request);
+        userService.updatePassword(userDetails.getUser().getUsername(), request);
     }
 }
