@@ -1,1 +1,1 @@
-INSERT INTO Users () VALUES ()
+INSERT INTO Product (product_name, price) VALUES ('아이스 아메리카노', '4500')
