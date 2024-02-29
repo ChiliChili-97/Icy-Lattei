@@ -41,6 +41,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             if (!jwtUtil.validateToken(tokenValue)) {
                 log.error("토큰 에러");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
 
