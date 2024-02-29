@@ -4,6 +4,7 @@ import com.sparta.project.icylattei.jwt.JwtAuthenticationFilter;
 import com.sparta.project.icylattei.jwt.JwtAuthorizationFilter;
 import com.sparta.project.icylattei.jwt.JwtUtil;
 import com.sparta.project.icylattei.userDetails.UserDetailsServiceImpl;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,12 +70,11 @@ public class WebSecurityConfig {
         http.logout(logout -> logout
             .logoutUrl("/users/logout")
             .addLogoutHandler((request, response, authentication) -> {
-                String token = request.getHeader("Authorization".substring(7));
+                String token = jwtUtil.getJwtFromHeader(request);
                 jwtUtil.invalidateToken(token);
-                response.setStatus(200);
             })
             .logoutSuccessHandler((request, response, authentication) -> {
-                response.setStatus(200);
+                response.setStatus(HttpServletResponse.SC_OK);
             }));
 
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
